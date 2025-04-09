@@ -89,6 +89,7 @@ const Index = () => {
             buttonText={formSettings.buttonText}
             thankYouMessage={formSettings.thankYouMessage}
             redirectDelay={formSettings.redirectDelay}
+            googleReviewUrl={formSettings.googleReviewUrl}
           />
         </div>
       </div>

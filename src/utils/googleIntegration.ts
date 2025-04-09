@@ -56,6 +56,7 @@ export const redirectToGoogleReview = (): void => {
   // In a real application, you might want to track this redirect
   console.log("Redirecting to Google review page");
   
-  // Redirect to the review URL
-  window.location.href = googleConfig.reviewPageUrl;
-};
+  // Use window.open to open in a new tab instead of redirecting the current window
+  // This ensures the user can still see the thank you message
+  window.open(googleConfig.reviewPageUrl, '_blank');
+}

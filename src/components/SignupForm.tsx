@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { FormData, saveToGoogleDrive, redirectToGoogleReview } from "@/utils/googleIntegration";
-import { googleConfig } from "@/config/google-config";
+import { FormData, saveToGoogleDrive } from "@/utils/googleIntegration";
 import { Loader2 } from "lucide-react";
 
 interface SignupFormProps {
@@ -22,20 +21,22 @@ interface SignupFormProps {
   buttonText?: string;
   thankYouMessage?: string;
   redirectDelay?: number;
+  googleReviewUrl?: string; // Added googleReviewUrl prop
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({
-  primaryColor = googleConfig.formConfig.theme.primaryColor,
-  secondaryColor = googleConfig.formConfig.theme.secondaryColor,
-  backgroundColor = googleConfig.formConfig.theme.backgroundColor,
-  textColor = googleConfig.formConfig.theme.textColor,
+  primaryColor,
+  secondaryColor,
+  backgroundColor,
+  textColor,
   fontFamily = "Inter",
   logoUrl = "",
   title = "Sign Up",
   subtitle = "Please provide your information to continue",
   buttonText = "Submit & Continue to Review",
-  thankYouMessage = googleConfig.formConfig.settings.thankYouMessage,
-  redirectDelay = googleConfig.formConfig.settings.redirectDelay,
+  thankYouMessage = "Thank you for signing up! You'll be redirected to our review page shortly.",
+  redirectDelay = 3000,
+  googleReviewUrl = "https://www.google.com/maps/place/YourBusinessName/reviews", // Default value
 }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
@@ -104,7 +105,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
         
         // Redirect after delay
         setTimeout(() => {
-          redirectToGoogleReview();
+          // Open Google review page in new tab
+          window.open(googleReviewUrl, '_blank');
         }, redirectDelay);
       } else {
         throw new Error("Failed to save data");
