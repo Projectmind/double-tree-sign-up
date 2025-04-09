@@ -11,7 +11,12 @@ const Index = () => {
   const loadSavedSettings = () => {
     const savedSettings = localStorage.getItem('formSettings');
     if (savedSettings) {
-      return JSON.parse(savedSettings);
+      try {
+        return JSON.parse(savedSettings);
+      } catch (e) {
+        console.error("Error parsing saved settings:", e);
+        // If parsing fails, return default settings
+      }
     }
     
     return {
@@ -34,25 +39,44 @@ const Index = () => {
   const [formSettings, setFormSettings] = useState(loadSavedSettings);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   
+  // Ensure settings persist after page refresh
+  useEffect(() => {
+    const savedSettings = localStorage.getItem('formSettings');
+    if (savedSettings) {
+      try {
+        const parsedSettings = JSON.parse(savedSettings);
+        setFormSettings(parsedSettings);
+      } catch (e) {
+        console.error("Error loading settings from localStorage:", e);
+      }
+    }
+  }, []);
+  
   const toggleAdminPanel = () => {
     setShowAdminPanel(!showAdminPanel);
   };
   
   const handleSettingsChange = (newSettings: any) => {
+    // Update the state with new settings
     setFormSettings(newSettings);
     
     // Save settings to localStorage
-    localStorage.setItem('formSettings', JSON.stringify(newSettings));
-    
-    // Update Google config with new settings
-    googleConfig.reviewPageUrl = newSettings.googleReviewUrl;
-    googleConfig.driveConfig.apiEndpoint = newSettings.googleDriveApiEndpoint;
-    googleConfig.formConfig.settings.thankYouMessage = newSettings.thankYouMessage;
-    googleConfig.formConfig.settings.redirectDelay = newSettings.redirectDelay;
-    googleConfig.formConfig.theme.primaryColor = newSettings.primaryColor;
-    googleConfig.formConfig.theme.secondaryColor = newSettings.secondaryColor;
-    googleConfig.formConfig.theme.backgroundColor = newSettings.backgroundColor;
-    googleConfig.formConfig.theme.textColor = newSettings.textColor;
+    try {
+      localStorage.setItem('formSettings', JSON.stringify(newSettings));
+      console.log("Settings saved to localStorage:", newSettings);
+      
+      // Update Google config with new settings
+      googleConfig.reviewPageUrl = newSettings.googleReviewUrl;
+      googleConfig.driveConfig.apiEndpoint = newSettings.googleDriveApiEndpoint;
+      googleConfig.formConfig.settings.thankYouMessage = newSettings.thankYouMessage;
+      googleConfig.formConfig.settings.redirectDelay = newSettings.redirectDelay;
+      googleConfig.formConfig.theme.primaryColor = newSettings.primaryColor;
+      googleConfig.formConfig.theme.secondaryColor = newSettings.secondaryColor;
+      googleConfig.formConfig.theme.backgroundColor = newSettings.backgroundColor;
+      googleConfig.formConfig.theme.textColor = newSettings.textColor;
+    } catch (e) {
+      console.error("Error saving settings to localStorage:", e);
+    }
   };
   
   // Dynamic background style based on settings
