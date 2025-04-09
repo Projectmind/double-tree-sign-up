@@ -52,11 +52,11 @@ export const saveToGoogleDrive = async (data: FormData): Promise<boolean> => {
 /**
  * Redirects user to Google review page
  */
-export const redirectToGoogleReview = (): void => {
+export const redirectToGoogleReview = (url: string): void => {
   // In a real application, you might want to track this redirect
-  console.log("Redirecting to Google review page");
+  console.log("Redirecting to Google review page:", url);
   
   // Use window.open to open in a new tab instead of redirecting the current window
   // This ensures the user can still see the thank you message
-  window.open(googleConfig.reviewPageUrl, '_blank');
+  window.open(url, '_blank');
 }

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SignupForm from "@/components/SignupForm";
 import AdminPanel from "@/components/AdminPanel";
 import { Button } from "@/components/ui/button";
@@ -7,22 +7,31 @@ import { Settings } from "lucide-react";
 import { googleConfig } from "@/config/google-config";
 
 const Index = () => {
-  const [formSettings, setFormSettings] = useState({
-    primaryColor: googleConfig.formConfig.theme.primaryColor,
-    secondaryColor: googleConfig.formConfig.theme.secondaryColor,
-    backgroundColor: googleConfig.formConfig.theme.backgroundColor,
-    textColor: googleConfig.formConfig.theme.textColor,
-    fontFamily: "Inter",
-    title: "Sign Up Form",
-    subtitle: "Please fill in your details to continue to our review page",
-    buttonText: "Submit & Continue to Review",
-    thankYouMessage: googleConfig.formConfig.settings.thankYouMessage,
-    redirectDelay: googleConfig.formConfig.settings.redirectDelay,
-    logoUrl: "",
-    googleReviewUrl: googleConfig.reviewPageUrl,
-    googleDriveApiEndpoint: googleConfig.driveConfig.apiEndpoint,
-  });
+  // Load settings from localStorage if available or use default settings
+  const loadSavedSettings = () => {
+    const savedSettings = localStorage.getItem('formSettings');
+    if (savedSettings) {
+      return JSON.parse(savedSettings);
+    }
+    
+    return {
+      primaryColor: googleConfig.formConfig.theme.primaryColor,
+      secondaryColor: googleConfig.formConfig.theme.secondaryColor,
+      backgroundColor: googleConfig.formConfig.theme.backgroundColor,
+      textColor: googleConfig.formConfig.theme.textColor,
+      fontFamily: "Inter",
+      title: "Sign Up Form",
+      subtitle: "Please fill in your details to continue to our review page",
+      buttonText: "Submit & Continue to Review",
+      thankYouMessage: googleConfig.formConfig.settings.thankYouMessage,
+      redirectDelay: googleConfig.formConfig.settings.redirectDelay,
+      logoUrl: "",
+      googleReviewUrl: googleConfig.reviewPageUrl,
+      googleDriveApiEndpoint: googleConfig.driveConfig.apiEndpoint,
+    };
+  };
   
+  const [formSettings, setFormSettings] = useState(loadSavedSettings);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   
   const toggleAdminPanel = () => {
@@ -31,6 +40,9 @@ const Index = () => {
   
   const handleSettingsChange = (newSettings: any) => {
     setFormSettings(newSettings);
+    
+    // Save settings to localStorage
+    localStorage.setItem('formSettings', JSON.stringify(newSettings));
     
     // Update Google config with new settings
     googleConfig.reviewPageUrl = newSettings.googleReviewUrl;

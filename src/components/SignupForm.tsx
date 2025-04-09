@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { FormData, saveToGoogleDrive } from "@/utils/googleIntegration";
+import { FormData, saveToGoogleDrive, redirectToGoogleReview } from "@/utils/googleIntegration";
 import { Loader2 } from "lucide-react";
 
 interface SignupFormProps {
@@ -21,7 +21,7 @@ interface SignupFormProps {
   buttonText?: string;
   thankYouMessage?: string;
   redirectDelay?: number;
-  googleReviewUrl?: string; // Added googleReviewUrl prop
+  googleReviewUrl?: string;
 }
 
 const SignupForm: React.FC<SignupFormProps> = ({
@@ -36,7 +36,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
   buttonText = "Submit & Continue to Review",
   thankYouMessage = "Thank you for signing up! You'll be redirected to our review page shortly.",
   redirectDelay = 3000,
-  googleReviewUrl = "https://www.google.com/maps/place/YourBusinessName/reviews", // Default value
+  googleReviewUrl = "https://www.google.com/maps/place/YourBusinessName/reviews",
 }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
@@ -105,8 +105,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
         
         // Redirect after delay
         setTimeout(() => {
-          // Open Google review page in new tab
-          window.open(googleReviewUrl, '_blank');
+          // Use the redirectToGoogleReview function with the provided URL
+          redirectToGoogleReview(googleReviewUrl);
         }, redirectDelay);
       } else {
         throw new Error("Failed to save data");
