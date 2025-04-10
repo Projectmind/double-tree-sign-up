@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,7 +37,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
     textColor: initialSettings?.textColor || googleConfig.formConfig.theme.textColor,
     fontFamily: initialSettings?.fontFamily || "Inter",
     logoUrl: initialSettings?.logoUrl || "",
-    googleReviewUrl: initialSettings?.googleReviewUrl || googleConfig.reviewPageUrl,
+    googleReviewUrl: initialSettings?.googleReviewUrl || googleConfig.reviewPageUrls.doubleTree, // Fixed: Using doubleTree URL as default
     googleDriveApiEndpoint: initialSettings?.googleDriveApiEndpoint || googleConfig.driveConfig.apiEndpoint,
   });
 
@@ -303,3 +304,4 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
 };
 
 export default AdminPanel;
+
