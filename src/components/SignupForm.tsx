@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { FormData, saveToGoogleDrive, redirectToGoogleReview } from "@/utils/googleIntegration";
 import { Loader2 } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { googleConfig } from "@/config/google-config";
 
 interface SignupFormProps {
   // Customization props
@@ -36,7 +38,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
   buttonText = "Submit & Continue to Review",
   thankYouMessage = "Thank you for signing up! You'll be redirected to our review page shortly.",
   redirectDelay = 3000,
-  googleReviewUrl = "https://www.google.com/maps/place/YourBusinessName/reviews",
+  googleReviewUrl, // Not used directly anymore, we'll use the selection
 }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
@@ -44,6 +46,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
     email: "",
     company: "",
     purpose: "",
+    selectedProperty: "doubleTree", // Default selection
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -65,12 +68,16 @@ const SignupForm: React.FC<SignupFormProps> = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handlePropertyChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, selectedProperty: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     
     // Form validation
-    if (!formData.name || !formData.email || !formData.company || !formData.purpose) {
+    if (!formData.name || !formData.email || !formData.company || !formData.purpose || !formData.selectedProperty) {
       toast({
         title: "Error",
         description: "Please fill in all fields",
@@ -103,10 +110,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
           description: "Your information has been submitted successfully.",
         });
         
+        // Determine which review URL to use based on property selection
+        const selectedReviewUrl = formData.selectedProperty === "doubleTree" 
+          ? googleConfig.reviewPageUrls.doubleTree 
+          : googleConfig.reviewPageUrls.home2Suites;
+        
         // Redirect after delay
         setTimeout(() => {
-          // Use the redirectToGoogleReview function with the provided URL
-          redirectToGoogleReview(googleReviewUrl);
+          redirectToGoogleReview(selectedReviewUrl);
         }, redirectDelay);
       } else {
         throw new Error("Failed to save data");
@@ -187,6 +198,25 @@ const SignupForm: React.FC<SignupFormProps> = ({
                   onChange={handleChange}
                   required
                 />
+              </div>
+              
+              {/* Property Selection */}
+              <div className="space-y-3">
+                <Label>Select Property</Label>
+                <RadioGroup 
+                  value={formData.selectedProperty} 
+                  onValueChange={handlePropertyChange}
+                  className="flex flex-col space-y-2"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="doubleTree" id="doubleTree" />
+                    <Label htmlFor="doubleTree" className="cursor-pointer">DoubleTree</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="home2Suites" id="home2Suites" />
+                    <Label htmlFor="home2Suites" className="cursor-pointer">Home2 Suites</Label>
+                  </div>
+                </RadioGroup>
               </div>
             </form>
           ) : (

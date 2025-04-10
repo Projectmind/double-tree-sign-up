@@ -2,8 +2,11 @@
 // Google integration configuration
 
 export const googleConfig = {
-  // Google review page URL - updated with the actual review URL
-  reviewPageUrl: "https://g.page/r/Cd9Sx2DusXg4EBM/review",
+  // Google review page URLs for both properties
+  reviewPageUrls: {
+    doubleTree: "https://g.page/r/Cd9Sx2DusXg4EBM/review",
+    home2Suites: "https://g.page/r/CfykebXntLwXEBM/review"
+  },
   
   // Google Drive API config
   driveConfig: {

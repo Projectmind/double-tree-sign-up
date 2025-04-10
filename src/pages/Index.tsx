@@ -31,8 +31,8 @@ const Index = () => {
       thankYouMessage: googleConfig.formConfig.settings.thankYouMessage,
       redirectDelay: googleConfig.formConfig.settings.redirectDelay,
       logoUrl: "",
-      // Always use the permanently configured Google review URL
-      googleReviewUrl: googleConfig.reviewPageUrl,
+      // Always use the permanently configured Google review URLs
+      googleReviewUrl: googleConfig.reviewPageUrls.doubleTree, // Default URL, but will use property-specific URLs
       // Always use the permanently configured API endpoint
       googleDriveApiEndpoint: googleConfig.driveConfig.apiEndpoint,
     };
@@ -49,8 +49,8 @@ const Index = () => {
         const parsedSettings = JSON.parse(savedSettings);
         // Make sure we always use the permanent API endpoint
         parsedSettings.googleDriveApiEndpoint = googleConfig.driveConfig.apiEndpoint;
-        // Make sure we always use the permanent Google Review URL
-        parsedSettings.googleReviewUrl = googleConfig.reviewPageUrl;
+        // Make sure we always use the permanent Google Review URLs
+        parsedSettings.googleReviewUrl = googleConfig.reviewPageUrls.doubleTree; // Default URL
         setFormSettings(parsedSettings);
       } catch (e) {
         console.error("Error loading settings from localStorage:", e);
@@ -65,8 +65,8 @@ const Index = () => {
   const handleSettingsChange = (newSettings: any) => {
     // Always ensure the Google Drive API endpoint is the permanent one
     newSettings.googleDriveApiEndpoint = googleConfig.driveConfig.apiEndpoint;
-    // Always ensure the Google Review URL is the permanent one
-    newSettings.googleReviewUrl = googleConfig.reviewPageUrl;
+    // Always ensure the Google Review URL is the permanent one (default one)
+    newSettings.googleReviewUrl = googleConfig.reviewPageUrls.doubleTree;
     
     // Update the state with new settings
     setFormSettings(newSettings);
@@ -77,7 +77,7 @@ const Index = () => {
       console.log("Settings saved to localStorage:", newSettings);
       
       // Update Google config with new settings
-      // Do not update the Google Review URL from localStorage
+      // Do not update the Google Review URLs from localStorage
       // Do not update the API endpoint from localStorage
       googleConfig.formConfig.settings.thankYouMessage = newSettings.thankYouMessage;
       googleConfig.formConfig.settings.redirectDelay = newSettings.redirectDelay;
