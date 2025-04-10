@@ -2,8 +2,8 @@
 // Google integration configuration
 
 export const googleConfig = {
-  // Google review page URL - this should be customized with the actual review URL
-  reviewPageUrl: "https://www.google.com/maps/place/YourBusinessName/reviews",
+  // Google review page URL - updated with the actual review URL
+  reviewPageUrl: "https://g.page/r/Cd9Sx2DusXg4EBM/review",
   
   // Google Drive API config
   driveConfig: {

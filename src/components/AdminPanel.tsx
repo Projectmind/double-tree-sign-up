@@ -258,8 +258,12 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                   name="googleReviewUrl"
                   value={settings.googleReviewUrl}
                   onChange={handleChange}
-                  placeholder="https://www.google.com/maps/place/YourBusinessName/reviews"
+                  placeholder="https://g.page/r/YOUR-REVIEW-CODE/review"
+                  disabled={true}
                 />
+                <p className="text-xs text-muted-foreground">
+                  This Google Review URL is permanently configured in the application
+                </p>
               </div>
               
               <div className="space-y-2">
