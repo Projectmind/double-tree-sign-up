@@ -14,33 +14,23 @@ export interface FormData {
  */
 export const saveToGoogleDrive = async (data: FormData): Promise<boolean> => {
   try {
-    // In a real implementation, this would call your Google Apps Script endpoint
-    // For now, we'll simulate a successful API call
     console.log("Saving to Google Drive:", data);
     
-    // This is a placeholder for the actual API call
-    // In a real implementation, you would use fetch() to POST to your Google Apps Script
-    // For example:
-    /*
+    // Use the permanently configured Google Apps Script endpoint
     const response = await fetch(googleConfig.driveConfig.apiEndpoint, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      mode: 'no-cors' // This is required for cross-origin requests to Google Apps Script
     });
     
-    if (!response.ok) {
-      throw new Error('Failed to save data');
-    }
+    // Since we're using no-cors, we can't read the response
+    // For production, you might want to set up proper CORS in your Apps Script
+    console.log("Data sent to Google Drive API");
     
-    const result = await response.json();
-    return result.success;
-    */
-    
-    // For demo purposes, we'll simulate a delay and return success
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    // For now, we'll assume success if no error is thrown
     return true;
   } catch (error) {
     console.error("Error saving to Google Drive:", error);

@@ -32,6 +32,7 @@ const Index = () => {
       redirectDelay: googleConfig.formConfig.settings.redirectDelay,
       logoUrl: "",
       googleReviewUrl: googleConfig.reviewPageUrl,
+      // Always use the permanently configured API endpoint
       googleDriveApiEndpoint: googleConfig.driveConfig.apiEndpoint,
     };
   };
@@ -45,6 +46,8 @@ const Index = () => {
     if (savedSettings) {
       try {
         const parsedSettings = JSON.parse(savedSettings);
+        // Make sure we always use the permanent API endpoint
+        parsedSettings.googleDriveApiEndpoint = googleConfig.driveConfig.apiEndpoint;
         setFormSettings(parsedSettings);
       } catch (e) {
         console.error("Error loading settings from localStorage:", e);
@@ -57,6 +60,9 @@ const Index = () => {
   };
   
   const handleSettingsChange = (newSettings: any) => {
+    // Always ensure the Google Drive API endpoint is the permanent one
+    newSettings.googleDriveApiEndpoint = googleConfig.driveConfig.apiEndpoint;
+    
     // Update the state with new settings
     setFormSettings(newSettings);
     
@@ -67,7 +73,7 @@ const Index = () => {
       
       // Update Google config with new settings
       googleConfig.reviewPageUrl = newSettings.googleReviewUrl;
-      googleConfig.driveConfig.apiEndpoint = newSettings.googleDriveApiEndpoint;
+      // Do not update the API endpoint from localStorage
       googleConfig.formConfig.settings.thankYouMessage = newSettings.thankYouMessage;
       googleConfig.formConfig.settings.redirectDelay = newSettings.redirectDelay;
       googleConfig.formConfig.theme.primaryColor = newSettings.primaryColor;

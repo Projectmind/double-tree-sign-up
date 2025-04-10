@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -271,7 +270,11 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
                   value={settings.googleDriveApiEndpoint}
                   onChange={handleChange}
                   placeholder="https://script.google.com/macros/s/YOUR-SCRIPT-ID/exec"
+                  disabled={true}
                 />
+                <p className="text-xs text-muted-foreground">
+                  This API endpoint is permanently configured in the application
+                </p>
               </div>
               
               <div className="pt-4">

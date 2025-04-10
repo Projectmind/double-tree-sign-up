@@ -7,8 +7,8 @@ export const googleConfig = {
   
   // Google Drive API config
   driveConfig: {
-    // These would typically be environment variables in a production app
-    apiEndpoint: "https://script.google.com/macros/s/YOUR-GOOGLE-APPS-SCRIPT-ID/exec",
+    // Using the provided Google Apps Script endpoint URL
+    apiEndpoint: "https://script.google.com/macros/s/AKfycbxpouanJkKzGnjsoe3VWIXdQiHzOuCn6W1aU4E7f-rv99R00DrJBcyZDr-BfP12Y7zX/exec",
     // This is a placeholder for actual implementation
     sheetId: "YOUR-GOOGLE-SHEET-ID", 
   },
