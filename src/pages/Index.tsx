@@ -90,9 +90,9 @@ const Index = () => {
     }
   };
   
-  // Dynamic background style based on settings
+  // Changed from gradient to solid color
   const pageBackgroundStyle = {
-    background: `linear-gradient(135deg, ${formSettings.backgroundColor} 0%, white 100%)`,
+    backgroundColor: "#09194e",
   };
   
   return (
