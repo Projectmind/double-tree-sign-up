@@ -123,7 +123,7 @@ const Index = () => {
           </p>
         </div>
         
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto rounded-xl overflow-hidden shadow-2xl">
           <SignupForm
             primaryColor={formSettings.primaryColor}
             secondaryColor={formSettings.secondaryColor}
