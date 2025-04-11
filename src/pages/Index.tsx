@@ -123,7 +123,7 @@ const Index = () => {
           </p>
         </div>
         
-        <div className="max-w-md mx-auto rounded-xl overflow-hidden shadow-2xl">
+        <div className="max-w-md mx-auto rounded-xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-1">
           <SignupForm
             primaryColor={formSettings.primaryColor}
             secondaryColor={formSettings.secondaryColor}
