@@ -119,7 +119,7 @@ const Index = () => {
             Welcome to Our Sign-up Page
           </h1>
           <p className="text-lg max-w-2xl mx-auto">
-            Please complete the form below. After submission, you'll be redirected to our Google review page.
+            {/* Removed text as requested */}
           </p>
         </div>
         
