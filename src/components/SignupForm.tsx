@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { FormData, saveToGoogleDrive, redirectToGoogleReview } from "@/utils/googleIntegration";
 import { Loader2 } from "lucide-react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import LogoSelectionButton from "./LogoSelectionButton";
 import { googleConfig } from "@/config/google-config";
 
 interface SignupFormProps {
@@ -134,6 +134,10 @@ const SignupForm: React.FC<SignupFormProps> = ({
     }
   };
 
+  // Define the logo paths
+  const doubleTreeLogo = "public/lovable-uploads/1213e61f-9b4c-496e-9954-2c35b1f1335e.png";
+  const home2SuitesLogo = "public/lovable-uploads/31f49801-a5f5-4076-a16f-d78ddefbb992.png";
+
   return (
     <div
       className="w-full max-w-md mx-auto animate-fade-in"
@@ -200,23 +204,25 @@ const SignupForm: React.FC<SignupFormProps> = ({
                 />
               </div>
               
-              {/* Property Selection */}
+              {/* Logo Selection Buttons */}
               <div className="space-y-3">
                 <Label>Select Property</Label>
-                <RadioGroup 
-                  value={formData.selectedProperty} 
-                  onValueChange={handlePropertyChange}
-                  className="flex flex-col space-y-2"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="doubleTree" id="doubleTree" />
-                    <Label htmlFor="doubleTree" className="cursor-pointer">DoubleTree</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="home2Suites" id="home2Suites" />
-                    <Label htmlFor="home2Suites" className="cursor-pointer">Home2 Suites</Label>
-                  </div>
-                </RadioGroup>
+                <div className="grid grid-cols-2 gap-4 mt-2">
+                  <LogoSelectionButton 
+                    logo={doubleTreeLogo}
+                    value="doubleTree"
+                    isSelected={formData.selectedProperty === "doubleTree"}
+                    onClick={() => handlePropertyChange("doubleTree")}
+                    alt="DoubleTree by Hilton"
+                  />
+                  <LogoSelectionButton 
+                    logo={home2SuitesLogo}
+                    value="home2Suites"
+                    isSelected={formData.selectedProperty === "home2Suites"}
+                    onClick={() => handlePropertyChange("home2Suites")}
+                    alt="Home2 Suites by Hilton"
+                  />
+                </div>
               </div>
             </form>
           ) : (
