@@ -21,8 +21,8 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
   const isPrimaryButton = value === "doubleTree";
   const primaryColor = "#09194e";
   const zoomLevel = {
-    doubleTree: isSelected ? "scale-[1.5]" : "scale-[1.2]",
-    home2Suites: isSelected ? "scale-[1.3]" : "scale-[1.1]"
+    doubleTree: isSelected ? "scale-[1.6]" : "scale-[1.4]",
+    home2Suites: isSelected ? "scale-[1.5]" : "scale-[1.3]"
   };
   
   return (
@@ -33,7 +33,7 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
         "w-full p-4 rounded-lg transition-all duration-200 transform",
         "border-2 hover:-translate-y-1 hover:shadow-xl",
         isSelected 
-          ? `${isPrimaryButton ? "bg-[#09194e]" : "bg-white"} border-primary translate-y-[-2px] shadow-lg` 
+          ? "bg-white border-primary translate-y-[-2px] shadow-lg" 
           : "bg-white border-transparent hover:border-gray-300",
         // 3D effect classes
         "relative after:absolute after:inset-0 after:rounded-lg",
@@ -54,8 +54,7 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
           className={cn(
             "object-contain transition-all duration-200",
             zoomLevel[value],
-            isSelected ? "max-h-16" : "max-h-14 opacity-90",
-            isPrimaryButton && isSelected ? "invert-[1] brightness-[10]" : ""
+            isSelected ? "max-h-16" : "max-h-14 opacity-90"
           )} 
         />
       </div>

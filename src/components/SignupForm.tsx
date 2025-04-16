@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,6 @@ import LogoSelectionButton from "./LogoSelectionButton";
 import { googleConfig } from "@/config/google-config";
 
 interface SignupFormProps {
-  // Customization props
   primaryColor?: string;
   secondaryColor?: string;
   backgroundColor?: string;
@@ -38,7 +36,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
   buttonText = "Submit & Continue to Review",
   thankYouMessage = "Thank you for signing up! You'll be redirected to our review page shortly.",
   redirectDelay = 3000,
-  googleReviewUrl, // Not used directly anymore, we'll use the selection
+  googleReviewUrl,
 }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
@@ -46,12 +44,11 @@ const SignupForm: React.FC<SignupFormProps> = ({
     email: "",
     company: "",
     purpose: "",
-    selectedProperty: "doubleTree", // Default selection
+    selectedProperty: "doubleTree",
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Custom styles based on props
   const customStyles = {
     background: backgroundColor,
     color: textColor,
@@ -76,7 +73,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
     e.preventDefault();
     setLoading(true);
     
-    // Form validation
     if (!formData.name || !formData.email || !formData.company || !formData.purpose || !formData.selectedProperty) {
       toast({
         title: "Error",
@@ -87,7 +83,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
       return;
     }
     
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
@@ -100,7 +95,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
     }
 
     try {
-      // Save data to Google Drive
       const success = await saveToGoogleDrive(formData);
       
       if (success) {
@@ -110,12 +104,10 @@ const SignupForm: React.FC<SignupFormProps> = ({
           description: "Your information has been submitted successfully.",
         });
         
-        // Determine which review URL to use based on property selection
         const selectedReviewUrl = formData.selectedProperty === "doubleTree" 
           ? googleConfig.reviewPageUrls.doubleTree 
           : googleConfig.reviewPageUrls.home2Suites;
         
-        // Redirect after delay
         setTimeout(() => {
           redirectToGoogleReview(selectedReviewUrl);
         }, redirectDelay);
@@ -134,9 +126,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
     }
   };
 
-  // Define the logo paths
-  const doubleTreeLogo = "public/lovable-uploads/1213e61f-9b4c-496e-9954-2c35b1f1335e.png";
-  const home2SuitesLogo = "public/lovable-uploads/31f49801-a5f5-4076-a16f-d78ddefbb992.png";
+  const doubleTreeLogo = "public/lovable-uploads/15a6aac8-ec16-4827-9360-0a09c34c3bd4.png";
+  const home2SuitesLogo = "public/lovable-uploads/0025e39c-6378-499c-921b-99fbb034dbb6.png";
 
   return (
     <div
@@ -204,7 +195,6 @@ const SignupForm: React.FC<SignupFormProps> = ({
                 />
               </div>
               
-              {/* Logo Selection Buttons */}
               <div className="space-y-3">
                 <Label>Select Property</Label>
                 <div className="grid grid-cols-2 gap-4 mt-2">
