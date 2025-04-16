@@ -17,9 +17,13 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
   onClick,
   alt
 }) => {
-  // Set primary color for DoubleTree logo (blue)
+  // Set primary color and zoom levels for each logo
   const isPrimaryButton = value === "doubleTree";
-  const primaryColor = isPrimaryButton ? "#09194e" : "#6E59A5";
+  const primaryColor = "#09194e";
+  const zoomLevel = {
+    doubleTree: isSelected ? "scale-[1.5]" : "scale-[1.2]",
+    home2Suites: isSelected ? "scale-[1.3]" : "scale-[1.1]"
+  };
   
   return (
     <button
@@ -28,10 +32,9 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
       className={cn(
         "w-full p-4 rounded-lg transition-all duration-200 transform",
         "border-2 hover:-translate-y-1 hover:shadow-xl",
-        "bg-white shadow-md",
         isSelected 
-          ? "border-primary translate-y-[-2px] shadow-lg" 
-          : "border-transparent hover:border-gray-300",
+          ? `${isPrimaryButton ? "bg-[#09194e]" : "bg-white"} border-primary translate-y-[-2px] shadow-lg` 
+          : "bg-white border-transparent hover:border-gray-300",
         // 3D effect classes
         "relative after:absolute after:inset-0 after:rounded-lg",
         isSelected 
@@ -50,8 +53,9 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
           alt={alt} 
           className={cn(
             "object-contain transition-all duration-200",
-            isPrimaryButton ? "scale-125" : "",
-            isSelected ? "max-h-16" : "max-h-14 opacity-90"
+            zoomLevel[value],
+            isSelected ? "max-h-16" : "max-h-14 opacity-90",
+            isPrimaryButton && isSelected ? "invert-[1] brightness-[10]" : ""
           )} 
         />
       </div>
