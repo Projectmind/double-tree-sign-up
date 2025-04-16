@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -110,6 +109,7 @@ export default {
 			fontFamily: {
 				'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 				'serif': ['Georgia', 'ui-serif', 'serif'],
+				'chuck-five': ['Chivo Five', 'sans-serif'],
 			}
 		}
 	},
