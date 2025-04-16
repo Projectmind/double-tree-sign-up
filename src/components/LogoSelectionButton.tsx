@@ -17,6 +17,10 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
   onClick,
   alt
 }) => {
+  // Set primary color for DoubleTree logo (blue)
+  const isPrimaryButton = value === "doubleTree";
+  const primaryColor = isPrimaryButton ? "#09194e" : "#6E59A5";
+  
   return (
     <button
       type="button"
@@ -34,6 +38,9 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
           ? "after:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]" 
           : "after:shadow-[inset_0_-1px_3px_rgba(0,0,0,0.05)]"
       )}
+      style={{
+        borderColor: isSelected ? primaryColor : 'transparent',
+      }}
       aria-selected={isSelected}
       aria-label={`Select ${alt}`}
     >
@@ -43,6 +50,7 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
           alt={alt} 
           className={cn(
             "object-contain transition-all duration-200",
+            isPrimaryButton ? "scale-125" : "",
             isSelected ? "max-h-16" : "max-h-14 opacity-90"
           )} 
         />
