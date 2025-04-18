@@ -17,10 +17,10 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
   onClick,
   alt
 }) => {
-  // Set zoom levels for each logo
+  // Set zoom levels for each logo with reduced scaling
   const zoomLevel = {
-    doubleTree: isSelected ? "scale-[1.8]" : "scale-[1.6]",
-    home2Suites: isSelected ? "scale-[1.7]" : "scale-[1.5]"
+    doubleTree: isSelected ? "scale-[1.5]" : "scale-[1.3]",
+    home2Suites: isSelected ? "scale-[1.4]" : "scale-[1.2]"
   };
   
   return (
@@ -51,8 +51,9 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
           alt={alt} 
           className={cn(
             "object-contain transition-all duration-200",
+            "max-w-[80%] max-h-[80%]", // Limit logo size within button
             zoomLevel[value as keyof typeof zoomLevel],
-            isSelected ? "max-h-full" : "max-h-14 opacity-90"
+            isSelected ? "opacity-100" : "opacity-90"
           )} 
         />
       </div>
