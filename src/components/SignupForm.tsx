@@ -149,8 +149,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
         <CardContent>
           {!submitted ? (
             <form onSubmit={handleSubmit} className="space-y-4 animate-slide-up">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+              <div className="space-y-2 transition-all duration-200 hover:shadow-md rounded-lg p-2">
+                <Label htmlFor="name" className="font-medium">Full Name</Label>
                 <Input
                   id="name"
                   name="name"
@@ -160,8 +160,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+              <div className="space-y-2 transition-all duration-200 hover:shadow-md rounded-lg p-2">
+                <Label htmlFor="email" className="font-medium">Email</Label>
                 <Input
                   id="email"
                   name="email"
@@ -172,8 +172,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="company">Company</Label>
+              <div className="space-y-2 transition-all duration-200 hover:shadow-md rounded-lg p-2">
+                <Label htmlFor="company" className="font-medium">Company</Label>
                 <Input
                   id="company"
                   name="company"
@@ -183,20 +183,20 @@ const SignupForm: React.FC<SignupFormProps> = ({
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="purpose">Purpose of Visit</Label>
+              <div className="space-y-2 transition-all duration-200 hover:shadow-md rounded-lg p-2">
+                <Label htmlFor="purpose" className="font-medium">Purpose of Visit</Label>
                 <Input
                   id="purpose"
                   name="purpose"
-                  placeholder="Consultation, Meeting, etc."
+                  placeholder="Business, Corporate Meetings, Events, etc."
                   value={formData.purpose}
                   onChange={handleChange}
                   required
                 />
               </div>
               
-              <div className="space-y-3">
-                <Label>Select Property</Label>
+              <div className="space-y-3 transition-all duration-200 hover:shadow-md rounded-lg p-2">
+                <Label className="font-medium">Select Property</Label>
                 <div className="grid grid-cols-2 gap-4 mt-2">
                   <LogoSelectionButton 
                     logo={doubleTreeLogo}
