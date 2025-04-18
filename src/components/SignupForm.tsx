@@ -126,8 +126,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
     }
   };
 
-  const doubleTreeLogo = "public/lovable-uploads/15a6aac8-ec16-4827-9360-0a09c34c3bd4.png";
-  const home2SuitesLogo = "public/lovable-uploads/0025e39c-6378-499c-921b-99fbb034dbb6.png";
+  const doubleTreeLogo = "/lovable-uploads/15a6aac8-ec16-4827-9360-0a09c34c3bd4.png";
+  const home2SuitesLogo = "/lovable-uploads/0025e39c-6378-499c-921b-99fbb034dbb6.png";
 
   return (
     <div

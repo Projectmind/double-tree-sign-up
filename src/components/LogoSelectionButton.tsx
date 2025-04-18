@@ -17,12 +17,10 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
   onClick,
   alt
 }) => {
-  // Set primary color and zoom levels for each logo
-  const isPrimaryButton = value === "doubleTree";
-  const primaryColor = "#09194e";
+  // Set zoom levels for each logo
   const zoomLevel = {
-    doubleTree: isSelected ? "scale-[1.6]" : "scale-[1.4]",
-    home2Suites: isSelected ? "scale-[1.5]" : "scale-[1.3]"
+    doubleTree: isSelected ? "scale-[1.8]" : "scale-[1.6]",
+    home2Suites: isSelected ? "scale-[1.7]" : "scale-[1.5]"
   };
   
   return (
@@ -42,19 +40,19 @@ const LogoSelectionButton: React.FC<LogoSelectionButtonProps> = ({
           : "after:shadow-[inset_0_-1px_3px_rgba(0,0,0,0.05)]"
       )}
       style={{
-        borderColor: isSelected ? primaryColor : 'transparent',
+        borderColor: isSelected ? '#09194e' : 'transparent',
       }}
       aria-selected={isSelected}
       aria-label={`Select ${alt}`}
     >
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-16">
         <img 
           src={logo} 
           alt={alt} 
           className={cn(
             "object-contain transition-all duration-200",
-            zoomLevel[value],
-            isSelected ? "max-h-16" : "max-h-14 opacity-90"
+            zoomLevel[value as keyof typeof zoomLevel],
+            isSelected ? "max-h-full" : "max-h-14 opacity-90"
           )} 
         />
       </div>

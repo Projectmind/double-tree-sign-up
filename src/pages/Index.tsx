@@ -76,7 +76,7 @@ const Index = () => {
   };
   
   const pageBackgroundStyle = {
-    backgroundColor: "#09194e",
+    backgroundColor: "#FFFFFF",
   };
   
   return (
