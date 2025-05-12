@@ -10,9 +10,9 @@ export const googleConfig = {
   
   // Google Drive API config
   driveConfig: {
-    // Using the provided Google Apps Script endpoint URL
+    // Using the provided Google Apps Script endpoint URL - this is the deployment ID for your Google Apps Script
     apiEndpoint: "https://script.google.com/macros/s/AKfycbxpouanJkKzGnjsoe3VWIXdQiHzOuCn6W1aU4E7f-rv99R00DrJBcyZDr-BfP12Y7zX/exec",
-    // This is a placeholder for actual implementation
+    // This is the ID of your Google Sheet - you should replace this with your actual Google Sheet ID
     sheetId: "YOUR-GOOGLE-SHEET-ID", 
   },
   

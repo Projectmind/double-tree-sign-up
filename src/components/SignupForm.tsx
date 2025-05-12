@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
@@ -95,13 +96,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
     }
 
     try {
+      console.log("Submitting form data:", formData);
       const success = await saveToGoogleDrive(formData);
       
       if (success) {
         setSubmitted(true);
         toast({
           title: "Success!",
-          description: "Your information has been submitted successfully.",
+          description: "Your information has been submitted to our database successfully.",
         });
         
         const selectedReviewUrl = formData.selectedProperty === "doubleTree" 
@@ -118,7 +120,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
       console.error("Form submission error:", error);
       toast({
         title: "Error",
-        description: "There was a problem submitting your information. Please try again.",
+        description: "There was a problem submitting your information. Please try again later.",
         variant: "destructive",
       });
     } finally {
